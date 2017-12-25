@@ -1,0 +1,62 @@
+.u-visually-hidden {
+  position: absolute;
+  left: -10000px;
+  opacity: 0;
+}
+
+.u-checkbox {
+  position: absolute; // take it out of document flow
+  opacity: 0; // hide it
+
+  & + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 100;
+    letter-spacing: 0.08em;
+    padding-left: 50px;
+    &::selection {
+      display: none;
+    }
+  }
+  & + label:before {
+    content: '';
+    margin-right: 10px;
+    margin-top: 7px;
+    width: 35px;
+    height: 35px;
+    background: white;
+    position: absolute;
+    left: 0;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+  }
+  &:focus + label:before { 
+  }
+  &:checked + label:before {
+    background: rgba(0,0,0,0.1);
+  }
+  &:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 16px;
+    background: white;
+    width: 2px;
+    height: 2px;
+    box-shadow: 
+      -4px 0 0 white,
+      -2px 0 0 white,
+      2px 0 0 white,
+      4px 0 0 white,
+      4px -2px 0 white,
+      4px -4px 0 white,
+      4px -6px 0 white,
+      4px -8px 0 white,
+      4px -10px 0 white,
+      4px -12px 0 white,
+      4px -14px 0 white,
+      4px -16px 0 white;
+    transform: rotate(45deg);
+  }
+}

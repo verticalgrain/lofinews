@@ -1,0 +1,19 @@
+html,
+body {
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+  letter-spacing: 0.005em;
+}
+body {
+  background: orange;
+  color: #404040;
+  perspective: 100vw;
+}
+ul {
+  list-style-type: none;
+  margin: 0; 
+  padding: 0;
+}
