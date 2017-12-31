@@ -46,6 +46,20 @@ class App extends Component {
     })
   }
 
+  hashCode = (str) => { // java String#hashCode
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+       hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return hash;
+  } 
+
+  intToRGB = (i) => {
+    var c = (i & 0x00FFFFFF)
+      .toString(16)
+      .toUpperCase();
+    return "00000".substring(0, 6 - c.length) + c;
+  }
 
   componentDidMount() {
     var that = this;
@@ -54,6 +68,7 @@ class App extends Component {
 
 
   render() {
+    const that = this;
     return (
 
       <div className="newslist__list">
@@ -61,18 +76,22 @@ class App extends Component {
           return (
 
             <article key={i + '-' + story.url} tabIndex="0" itemScope itemType="http://schema.org/NewsArticle">
-              <a href={story.url} className="newslist__item" target="_blank">
-                <div className="newslist__source">
+              <a href={story.url} className="newslist__item" style={{backgroundColor: that.intToRGB(that.hashCode(story.source.name))}} target="_blank">
+{/*                <div className="newslist__source">
                   <div className="newslist__source-image" style={{backgroundImage: "url(http://www.bbc.co.uk/news/special/2015/newsspec_10857/bbc_news_logo.png?cb=1)"}} itemProp="image">
                   </div>
                   <div className="newslist__source-name">
                     {story.source.name}
                   </div>
-                </div>
+                </div>*/}
                 <div className="newslist__content" itemProp="articleBody">
+                  <div style={{display: "block",fontSize: "11px"}}>
+                  {story.source.name}
+                  </div>
                   <div className="newslist__title" itemProp="headline">
                     {story.title}
                   </div>
+                  <div className="newslist__bullet">•</div>
                   <div className="newslist__excerpt" itemProp="description">
                     {story.description}
                   </div>

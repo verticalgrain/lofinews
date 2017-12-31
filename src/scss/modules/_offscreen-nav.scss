@@ -3,15 +3,18 @@
   z-index: 9;
   height: 100vh;
   overflow-y: scroll;
-  width: calc(100vw - 100px);
+  width: calc(100vw - #{$offscreen-nav-offset});
   top: 0;
-  transform: translate3d( -100vw, 0, 0 );
+  transform: translate3d( calc(-100vw + #{$offscreen-nav-offset}), 0, 0 );
   background: orange;
-  padding: 30px 0 0 50px;
+  padding: 20px 0 0 20px;
   transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
   @media (max-width: 600px) {
-    width: calc(100vw - 40px);
+    width: calc(100vw - #{$offscreen-nav-offset-mobile});
+    transform: translate3d( calc(-100vw + #{$offscreen-nav-offset-mobile}), 0, 0 );
   }
+
   &__list {
     
   }

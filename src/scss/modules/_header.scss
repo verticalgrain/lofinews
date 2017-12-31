@@ -1,0 +1,25 @@
+.header {
+    text-align: center;
+    padding: 7px 0 5px 0;
+    border-bottom: 1px solid #404040;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 30px;
+    background: #f1f1f1;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+    .is-nav-toggled-yes & {
+      transform: translate3d( calc(100vw - #{$offscreen-nav-offset}), 0, 0 );
+      @media (max-width: 600px) {
+        transform: translate3d( calc(100% - #{$offscreen-nav-offset-mobile}), 0, 0 );
+      } 
+    }
+    &__title {
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.025em;
+    }
+}
