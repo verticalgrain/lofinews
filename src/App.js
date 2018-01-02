@@ -29,7 +29,7 @@ class App extends Component {
           
           <div className="newslist newslist--main">
             
-            <Newslist />
+            <Newslist newsApiCallUrl="https://newsapi.org/v2/top-headlines?sources=bbc-news,cnn,the-economist,time,ars-technica,the-washington-post&apiKey=f2bd828e06724a59821444aaec0469dc" />
           
           </div>
         </main>

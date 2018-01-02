@@ -1,7 +1,7 @@
 .newslist {
   padding-left: 8px;
   padding-right: 8px;
-  padding-top: 40px;
+  padding-top: 53px;
   a {
     text-decoration: none;
     color: #404040;
@@ -14,34 +14,18 @@
     flex-direction: row;
     padding-left: 11px;
     position: relative;
-    &:before {
-      content: "";
-      width: 3px;
-      height: 18px;
-      background: red;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
   }  
   &__source {
-    width: 50px;
-    max-width: 50px;
-    margin-right: 15px;
-    word-wrap: break-word;
+    display: block;
+    font-size: 11px;
   }
-  &__source-image {
-    width: 40px;
-    height: 40px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center top;
-    margin-bottom: 2px;
-  }
-  &__source-name {
-    font-size: 9px;
-    text-align: center;
-    width: 100%;
+  &__colorbar {
+    width: 3px;
+    height: 18px;
+    background: red;
+    position: absolute;
+    left: 0;
+    top: 0;
   }
   &__title {
     font-size: 14px;

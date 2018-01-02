@@ -7,6 +7,10 @@ class App extends Component {
   constructor(props) {
     super();
 
+    // if (localStorage.getItem("newsStoreLocal") !== null) {
+    //   const newsStoreLocal = JSON.parse(localStorage.getItem( 'newsStoreLocal' ));
+    // }
+
     this.state = {
       stories: [],
       lastUpdated: new Date()
@@ -22,10 +26,26 @@ class App extends Component {
   }
   
 
-  fetchStories = (sourceid) => {
-    var that = this;
+  fetchStories = ( newsApiCallUrl ) => {
+    const that = this;
+    console.log('test 1');
+    if (localStorage.getItem("newsStoreLocal") !== null) {
+      console.log('not null')
+      that.getStoriesLocalStore();
+    } else {
+      console.log('null')
+      that.getStoriesFromApi( newsApiCallUrl );
 
-    fetch('https://newsapi.org/v2/top-headlines?sources=bbc-news,cnn,the-economist,time,ars-technica,the-washington-post&apiKey=f2bd828e06724a59821444aaec0469dc')
+    }
+
+  }
+
+
+  getStoriesFromApi = ( newsApiCallUrl ) => {
+    const that = this;
+
+    console.log('test 2');
+    fetch( newsApiCallUrl )
     .then(function(response) {
       if (response.status >= 400) {
         // throw new Error("The news api doesnt seem available right now");
@@ -36,57 +56,75 @@ class App extends Component {
     })
     .then(function(data) {
 
-      that.setState({
-        stories: data.articles,
+      localStorage.setItem( 'newsStoreLocal', JSON.stringify( data.articles ) );
+
+      that.getStoriesLocalStore;
+
+    })
+
+  }
+
+
+  getStoriesLocalStore = () => {
+    console.log('test 3');
+
+    if (localStorage.getItem("newsStoreLocal") !== null) {
+      const newsStoreLocal = JSON.parse(localStorage.getItem( 'newsStoreLocal' ));
+    
+      this.setState({
+        stories: newsStoreLocal,
         lastUpdated: new Date()
       });
 
       window.scrollTo(0, 0);
+    }
 
-    })
   }
 
-  hashCode = (str) => { // java String#hashCode
+
+  stringToColor = (str) => {
     var hash = 0;
     for (var i = 0; i < str.length; i++) {
-       hash = str.charCodeAt(i) + ((hash << 5) - hash);
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
-    return hash;
-  } 
-
-  intToRGB = (i) => {
-    var c = (i & 0x00FFFFFF)
-      .toString(16)
-      .toUpperCase();
-    return "00000".substring(0, 6 - c.length) + c;
+    var colour = '#';
+    for (var i = 0; i < 3; i++) {
+      var value = (hash >> (i * 8)) & 0xFF;
+      colour += ('99' + value.toString(16)).substr(-2);
+    }
+    return colour;
   }
+
+  // componentWillUpdate = () => {
+  //   this.fetchStories(this.props.newsApiCallUrl);
+  // }
 
   componentDidMount() {
-    var that = this;
-    this.fetchStories(that.props.currentsource);
+    this.fetchStories(this.props.newsApiCallUrl);
   }
-
 
   render() {
     const that = this;
+
     return (
 
       <div className="newslist__list">
         {this.state.stories.map(function(story,i){
+          console.log(story);
+          const barColor = that.stringToColor( story.source.name );
+          console.log(barColor);
+          const barStyles = {
+            background: barColor
+          }
+
           return (
 
             <article key={i + '-' + story.url} tabIndex="0" itemScope itemType="http://schema.org/NewsArticle">
-              <a href={story.url} className="newslist__item" style={{backgroundColor: that.intToRGB(that.hashCode(story.source.name))}} target="_blank">
-{/*                <div className="newslist__source">
-                  <div className="newslist__source-image" style={{backgroundImage: "url(http://www.bbc.co.uk/news/special/2015/newsspec_10857/bbc_news_logo.png?cb=1)"}} itemProp="image">
-                  </div>
-                  <div className="newslist__source-name">
-                    {story.source.name}
-                  </div>
-                </div>*/}
+              <a href={story.url} className="newslist__item"  target="_blank">
+                <div className="newslist__colorbar" style={barStyles}></div>
                 <div className="newslist__content" itemProp="articleBody">
-                  <div style={{display: "block",fontSize: "11px"}}>
-                  {story.source.name}
+                  <div className="newslist__source" style={{display: "block",fontSize: "11px"}}>
+                    {story.source.name}
                   </div>
                   <div className="newslist__title" itemProp="headline">
                     {story.title}

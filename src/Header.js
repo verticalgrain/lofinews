@@ -27,7 +27,7 @@ class Header extends Component {
                 <label className="u-checkbox-label" htmlFor="checkbox-images">Show images on articles</label>
               </li>
               <li className="offscreen-nav__item offscreen-nav__item--small">
-                <div>news feed by <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer">newsapi.org</a></div>
+                <div>news feed by</div> <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer">newsapi.org</a>
               </li>
             </ul>
           </div>
