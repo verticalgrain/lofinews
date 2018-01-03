@@ -4,7 +4,14 @@ import './App.css';
 class Header extends Component {
   
   toggleNav() {    
-    this.props.onClick();
+    this.props.actionToggleNav();
+  }
+
+  updateApiUrl( apiUrl ) {    
+    this.props.actionUpdateApiUrl( apiUrl );
+  }
+
+  componentDidMount() {
   }
 
   render() {
@@ -18,9 +25,10 @@ class Header extends Component {
           </div>
           <div className="offscreen-nav">
             <ul className="offscreen-nav__list">
-              <li className="offscreen-nav__item"><a href="#">Headlines - Global</a></li>
-              <li className="offscreen-nav__item"><a href="#">Headlines - Canada</a></li>
-              <li className="offscreen-nav__item"><a href="#">Headlines - Global</a></li>
+              <li className="offscreen-nav__item"><a href="#" onClick={() => this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bbc-news,cnn,the-economist,time,ars-technica,the-washington-post&apiKey=f2bd828e06724a59821444aaec0469dc')}>Headlines - Global</a></li>
+              <li className="offscreen-nav__item"><a href="#" onClick={() => this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&apiKey=f2bd828e06724a59821444aaec0469dc')}>Headlines - {this.props.countryName}</a></li>
+              <li className="offscreen-nav__item"><a href="#" onClick={() => this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,wired&apiKey=f2bd828e06724a59821444aaec0469dc')}>Headlines - Tech</a></li>
+              <li className="offscreen-nav__item"><a href="#" onClick={() => this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news,&apiKey=f2bd828e06724a59821444aaec0469dc')}>Headlines - Modern</a></li>
               <li className="offscreen-nav__item"><label><input type="text" className="offscreen-nav__search" placeholder="Search 5000 sources..." /></label></li>
               <li className="offscreen-nav__item offscreen-nav__item--photos">
                 <input type="checkbox" id="checkbox-images" className="u-checkbox offscreen-nav__checkbox" defaultChecked />

@@ -12,7 +12,6 @@ class App extends Component {
     // }
 
     this.state = {
-      stories: [],
       lastUpdated: new Date()
     }
 
@@ -25,62 +24,6 @@ class App extends Component {
     return null;
   }
   
-
-  fetchStories = ( newsApiCallUrl ) => {
-    const that = this;
-    console.log('test 1');
-    if (localStorage.getItem("newsStoreLocal") !== null) {
-      console.log('not null')
-      that.getStoriesLocalStore();
-    } else {
-      console.log('null')
-      that.getStoriesFromApi( newsApiCallUrl );
-
-    }
-
-  }
-
-
-  getStoriesFromApi = ( newsApiCallUrl ) => {
-    const that = this;
-
-    console.log('test 2');
-    fetch( newsApiCallUrl )
-    .then(function(response) {
-      if (response.status >= 400) {
-        // throw new Error("The news api doesnt seem available right now");
-        console.log("The news api doesn't seem available right now");
-        return;
-      }
-      return response.json();
-    })
-    .then(function(data) {
-
-      localStorage.setItem( 'newsStoreLocal', JSON.stringify( data.articles ) );
-
-      that.getStoriesLocalStore;
-
-    })
-
-  }
-
-
-  getStoriesLocalStore = () => {
-    console.log('test 3');
-
-    if (localStorage.getItem("newsStoreLocal") !== null) {
-      const newsStoreLocal = JSON.parse(localStorage.getItem( 'newsStoreLocal' ));
-    
-      this.setState({
-        stories: newsStoreLocal,
-        lastUpdated: new Date()
-      });
-
-      window.scrollTo(0, 0);
-    }
-
-  }
-
 
   stringToColor = (str) => {
     var hash = 0;
@@ -100,7 +43,6 @@ class App extends Component {
   // }
 
   componentDidMount() {
-    this.fetchStories(this.props.newsApiCallUrl);
   }
 
   render() {
@@ -109,10 +51,10 @@ class App extends Component {
     return (
 
       <div className="newslist__list">
-        {this.state.stories.map(function(story,i){
-          console.log(story);
+        {this.props.stories.map(function(story,i){
+          // console.log(story);
           const barColor = that.stringToColor( story.source.name );
-          console.log(barColor);
+          // console.log(barColor);
           const barStyles = {
             background: barColor
           }
