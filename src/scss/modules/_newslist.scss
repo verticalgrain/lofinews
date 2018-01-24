@@ -48,7 +48,7 @@
   &__content {
     display: block;
     padding-right: 5px;
-    width: calc(100% - 40px);
+    width: calc(100% - 90px);
     line-height: 115%;
   }
   &__timestamp {
@@ -58,8 +58,8 @@
     font-weight: 600;
   }
     &__image {
-    width: 40px;
-    height: 40px;
+    width: 90px;
+    height: 90px;
     margin-top: 22px;
     background-size: cover;
     background-repeat: no-repeat;

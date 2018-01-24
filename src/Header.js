@@ -30,12 +30,12 @@ class Header extends Component {
               <li className="offscreen-nav__item"><a href="#" onClick={() => this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,wired&apiKey=f2bd828e06724a59821444aaec0469dc')}>Headlines - Tech</a></li>
               <li className="offscreen-nav__item"><a href="#" onClick={() => this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news,&apiKey=f2bd828e06724a59821444aaec0469dc')}>Headlines - Modern</a></li>
               <li className="offscreen-nav__item"><label><input type="text" className="offscreen-nav__search" placeholder="Search 5000 sources..." /></label></li>
-              <li className="offscreen-nav__item offscreen-nav__item--photos">
+{/*              <li className="offscreen-nav__item offscreen-nav__item--photos">
                 <input type="checkbox" id="checkbox-images" className="u-checkbox offscreen-nav__checkbox" defaultChecked />
                 <label className="u-checkbox-label" htmlFor="checkbox-images">Show images on articles</label>
-              </li>
+              </li>*/}
               <li className="offscreen-nav__item offscreen-nav__item--small">
-                <div>news feed by</div> <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer">newsapi.org</a>
+                <div>news feed provided by</div> <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer">newsapi.org</a>
               </li>
             </ul>
           </div>

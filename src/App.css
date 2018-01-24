@@ -99,7 +99,7 @@ ul {
   .newslist__content {
     display: block;
     padding-right: 5px;
-    width: calc(100% - 40px);
+    width: calc(100% - 90px);
     line-height: 115%; }
   .newslist__timestamp {
     font-size: 12px;
@@ -107,8 +107,8 @@ ul {
     color: rgba(0, 0, 0, 0.35);
     font-weight: 600; }
   .newslist__image {
-    width: 40px;
-    height: 40px;
+    width: 90px;
+    height: 90px;
     margin-top: 22px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -119,6 +119,7 @@ ul {
   transform-style: preserve-3d;
   transition-timing-function: ease-in-out; }
   .is-nav-toggled-yes .main {
+    pointer-events: none;
     transform: translate3d(calc(100vw - 100px), 0, 0); }
     @media (max-width: 600px) {
       .is-nav-toggled-yes .main {
@@ -177,24 +178,24 @@ ul {
   background: orange;
   padding: 20px 0 0 20px;
   transition-duration: 0.1s;
-  transition-timing-function: ease-in-out; }
+  transition-timing-function: ease-in-out;
+  font-size: 14px; }
   @media (max-width: 600px) {
     .offscreen-nav {
       width: calc(100vw - 40px);
       transform: translate3d(calc(-100vw + 40px), 0, 0); } }
   .offscreen-nav__item {
     width: 100%;
-    height: 50px;
     float: left;
     color: white;
-    line-height: 50px;
     text-align: left; }
     .offscreen-nav__item a {
       text-decoration: none;
       color: white;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 100;
       letter-spacing: 0.08em;
+      line-height: 40px;
       padding: 0 2px 0 10px;
       width: 100%;
       text-align: left;
@@ -214,7 +215,7 @@ ul {
       .offscreen-nav__item--small a {
         text-decoration: underline; }
   .offscreen-nav__search {
-    height: 50px;
+    height: 40px;
     width: 100%;
     max-width: 400px;
     display: block;
@@ -224,7 +225,7 @@ ul {
     margin: 8px 0 0 0;
     text-align: left;
     color: white;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 100;
     letter-spacing: 0.08em;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
