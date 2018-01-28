@@ -14,6 +14,17 @@
     flex-direction: row;
     padding-left: 11px;
     position: relative;
+    &:after {
+      content: "";
+      width: 100vw;
+      height: 1px;
+      position: absolute;
+      left: 0;
+      bottom: -9px;
+      background: rgba(0,0,0,0.15);
+      left: 50%;
+      transform: translate3d(-50%,0,0);
+    }
   }  
   &__source {
     display: block;

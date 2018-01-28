@@ -17,4 +17,13 @@
     height: 7px;
     display: block;
   }
+  .is-nav-toggled-yes & {
+    &:after {
+      content: "";
+      width: 100%;
+      height: calc(100vh - 40px);
+      position: absolute;
+      top: 40px;
+    }
+  }
 }

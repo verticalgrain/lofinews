@@ -96,7 +96,6 @@ class App extends Component {
     const that = this;
     console.log('changing the news api url to check out some new stories');
 
-    console.log( newsApiUrlNew );
     that.fetchStories( newsApiUrlNew );
 
     this.toggleNav();
@@ -111,7 +110,6 @@ class App extends Component {
     fetch(url)
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson);
         this.setState({
           countryCode: responseJson.country_code,
           countryName: responseJson.country_name
@@ -124,7 +122,6 @@ class App extends Component {
 
 
   componentWillMount() {
-    
   }
 
 
@@ -132,7 +129,7 @@ class App extends Component {
     return (
       <div className={this.state.navtoggled ? "is-nav-toggled-yes" : ""}>
         
-        <Header actionToggleNav={this.toggleNav} actionUpdateApiUrl={this.updateApiUrl} countryCode={this.countryCode} countryName={this.countryName} />
+        <Header actionToggleNav={this.toggleNav} actionUpdateApiUrl={this.updateApiUrl} countryCode={this.state.countryCode} countryName={this.state.countryName} />
         
         <main id="main" className="main" tabIndex="0">
           
