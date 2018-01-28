@@ -48,7 +48,7 @@ class Header extends Component {
                 <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,wired&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>Modern</button>
+                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>Editorial</button>
                 <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               <li className="offscreen-nav__item">
@@ -63,13 +63,17 @@ class Header extends Component {
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>Sports</button>
                 <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
+              <li className="offscreen-nav__item">
+                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>Celebrity Gossip</button>
+                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+              </li>
               <li className="offscreen-nav__item offscreen-nav__title">Sources</li>
               <li className="offscreen-nav__item">
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bbc-news&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>BBC</button>
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=cnn&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>CNN</button>
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=reuters&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>Reuters</button>
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=vice-news&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>Vice</button>
-                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=rt&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>RT</button>
+                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>RT</button>
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=reddit-r-all&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>Reddit-r-all</button>
               </li>
 {/*              <li className="offscreen-nav__item offscreen-nav__item--photos">
