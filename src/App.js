@@ -11,8 +11,8 @@ class App extends Component {
       navtoggled: false,
       newsApiUrl: 'https://newsapi.org/v2/top-headlines?sources=bbc-news,cnn,the-economist,time,ars-technica,the-washington-post&apiKey=f2bd828e06724a59821444aaec0469dc',
       stories: [],
-      countryCode: 'usa',
-      countryName: 'United States'
+      countryCode: '',
+      countryName: ''
     };
     this.toggleNav = this.toggleNav.bind(this);
   }
@@ -116,7 +116,7 @@ class App extends Component {
         });
       })
       .catch((error) => {
-       console.error(error);
+        console.error(error);
       });
   }
 
@@ -154,7 +154,6 @@ class App extends Component {
   componentDidMount() {
     this.getStoriesFromApi( this.state.newsApiUrl );
     this.getCountryCode();
-    console.log(this.state);
   }
 
 }

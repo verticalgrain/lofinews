@@ -18,10 +18,27 @@ class Header extends Component {
   handleSubmit = (event) => {
 
     event.preventDefault();
-    
+
+    var topSources = [];
+
+    fetch( 'https://newsapi.org/v2/sources?apiKey=f2bd828e06724a59821444aaec0469dc' )
+    .then(function(response) {
+      if (response.status >= 400) {
+        // throw new Error("The news api doesnt seem available right now");
+        console.log("The news api doesn't seem available right now");
+        return;
+      }
+      return response.json();
+    })
+    .then(function(data) {
+      
+      topSources = data.sources;
+
+    })
+
     var searchEncoded = encodeURI( event.target.search.value );
 
-    this.updateApiUrl('https://newsapi.org/v2/everything?q=' + searchEncoded + '&sources=bbc-news,cnn,rte&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc')
+    this.updateApiUrl('https://newsapi.org/v2/everything?q=' + searchEncoded + '&sources=' + topSources + '&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc')
   
   }
 
@@ -42,74 +59,79 @@ class Header extends Component {
             <ul className="offscreen-nav__list">
               <li className="offscreen-nav__item offscreen-nav__item--search">
                 <form onSubmit={this.handleSubmit}>
-                  <label><input type="text" name="search" className="offscreen-nav__search" placeholder="Search 5000 sources..." /></label>
+                  <label><input type="text" name="search" className="offscreen-nav__search" placeholder="Search top 134 sources..." /></label>
                   {/* //dev todo: add sort options, add sources include / exclude options, checkbox for major sources only (checked by default), date range, language */}
                   <input type="submit" className="offscreen-nav__submit" />
                 </form>
               </li>
+              {
+                (( this.props.countryCode.trim() !=="" ) || ( this.props.countryCode.trim().length !== 0 ))
+                ? <div><li className="offscreen-nav__item offscreen-nav__title">Local</li>
+                  <li className="offscreen-nav__item">
+                    <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
+                      <div className="offscreen-nav__item-name">{this.props.countryName}</div>
+                    </button>
+                    <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                  </li></div>
+                : <div></div>
+              }
               <li className="offscreen-nav__item offscreen-nav__title">Headlines</li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bbc-news,cnn,the-economist,time,ars-technica,the-washington-post,the-guardian-uk,wired,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>
+                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,ars-technica,the-washington-post,the-guardian-uk,wired,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>
                   <div className="offscreen-nav__item-name">Global</div>
-                  <div className="offscreen-nav__item-sources">BBC, CNN, The Economist, Time, Ars Technica, Wired, The Guardian, RT English</div>
+                  <div className="offscreen-nav__item-sources">Ars Technica, Associated Press, BBC, CNN, The Economist, The Guardian, RT English, Time, Wired</div>
                 </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bbc-news,cnn,the-economist,time,ars-technica,the-washington-post&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
-              </li>
-              <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                  <div className="offscreen-nav__item-name">{this.props.countryName}</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,ars-technica,the-washington-post&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               {/*<li className="offscreen-nav__item"><a onClick={() => { this.toggleItem( true ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?category=technology&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }>Tech</a></li>*/}
               <li className="offscreen-nav__item">
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,techradar,the-next-web,wired,next-big-future&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
                   <div className="offscreen-nav__item-name">Tech & Futurism</div>
-                  <div className="offscreen-nav__item-sources">Buzzfeed, Hacker News, Crypto Coins News, Engadget, Ars Technica, Mashable, Next Big Future, Recode, Reddit /r/all, Techcrunch, Techradar, The Next Web, Wired, </div>
+                  <div className="offscreen-nav__item-sources">Ars Technica, Buzzfeed, Crypto Coins News, Engadget, Hacker News, Mashable, Next Big Future, The Next Web, Recode, Reddit /r/all, Techcrunch, Techradar, Wired</div>
                 </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,techradar,the-next-web,wired,next-big-future&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,techradar,the-next-web,wired,next-big-future&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               <li className="offscreen-nav__item">
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news,axios&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
                   <div className="offscreen-nav__item-name">New Media</div>
-                  <div className="offscreen-nav__item-sources">The Verge, Vice News, Axios</div>
+                  <div className="offscreen-nav__item-sources">Axios, The Verge, Vice News</div>
                 </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               <li className="offscreen-nav__item">
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bloomberg,business-insider,financial-post,financial-times,fortune,the-economist&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
                   <div className="offscreen-nav__item-name">Finance</div>
-                  <div className="offscreen-nav__item-sources">Bloomberg, Business Insider, Financial Post, Financial Times, Fortune, The Economist</div>
+                  <div className="offscreen-nav__item-sources">Bloomberg, Business Insider, The Economist, Financial Post, Financial Times, Fortune</div>
                 </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bloomberg,business-insider,financial-post,financial-times,fortune,the-economist&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bloomberg,business-insider,financial-post,financial-times,fortune,the-economist&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               <li className="offscreen-nav__item">
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=politico,the-hill&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
                   <div className="offscreen-nav__item-name">Politics</div>
                   <div className="offscreen-nav__item-sources">Politico, The Hill</div>
                 </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=politico,the-hill&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=politico,the-hill&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=nfl-news,nhl-news,the-sport-bible,fox-sports,espn,bbc-sport&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
+                <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=nfl-news,nhl-news,the-sport-bible,fox-sports,espn,bbc-sport,talksport&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
                   <div className="offscreen-nav__item-name">Sports</div>
-                  <div className="offscreen-nav__item-sources">BBC Sports, ESPN, Fox Sports, NFL News, NHL News, The Sport Bible</div>
+                  <div className="offscreen-nav__item-sources">BBC Sports, ESPN, Fox Sports, NFL News, NHL News, The Sport Bible, Talksport</div>
                 </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=nfl-news,nhl-news,the-sport-bible,fox-sports,espn,bbc-sport,talksport&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               <li className="offscreen-nav__item">
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-huffington-post,entertainment-weekly,buzzfeed,mashable,mirror&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
                   <div className="offscreen-nav__item-name">Celebrity Gossip</div>
-                  <div className="offscreen-nav__item-sources">The Huffington Post, Entertainment Weekly, Buzzfeed, Mashable, The Mirror</div>
+                  <div className="offscreen-nav__item-sources">Buzzfeed, The Huffington Post, Entertainment Weekly, Mashable, The Mirror</div>
                 </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-huffington-post,entertainment-weekly,buzzfeed,mashable,mirror&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-huffington-post,entertainment-weekly,buzzfeed,mashable,mirror&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               <li className="offscreen-nav__item">
                 <button onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=new-scientist,national-geographic&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
                   <div className="offscreen-nav__item-name">Science</div>
-                  <div className="offscreen-nav__item-sources">New Scientist, National Geographic, </div>
+                  <div className="offscreen-nav__item-sources">National Geographic, New Scientist</div>
                 </button>
-                <span className="offscreen-nav__refresh" onClick={() => {  this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=new-scientist,national-geographic&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=new-scientist,national-geographic&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
               </li>
               
               <li className="offscreen-nav__item offscreen-nav__title">Sources</li>
