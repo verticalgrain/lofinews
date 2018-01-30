@@ -12,7 +12,8 @@ class App extends Component {
       newsApiUrl: 'https://newsapi.org/v2/top-headlines?sources=bbc-news,cnn,the-economist,time,ars-technica,the-washington-post&apiKey=f2bd828e06724a59821444aaec0469dc',
       stories: [],
       countryCode: '',
-      countryName: ''
+      countryName: '',
+      headerTitle: 'Headlines - Global'
     };
     this.toggleNav = this.toggleNav.bind(this);
   }
@@ -105,7 +106,6 @@ class App extends Component {
 
 
   getCountryCode = () => {
-
     var url = 'https://freegeoip.net/json/';
     fetch(url)
       .then((response) => response.json())
@@ -121,6 +121,17 @@ class App extends Component {
   }
 
 
+  updateHeaderTitle = ( headerTitleNew ) => {
+    const that = this;
+
+    console.log('updating header title');
+
+    this.setState({
+      headerTitle: headerTitleNew
+    });
+  }
+
+
   componentWillMount() {
   }
 
@@ -129,7 +140,7 @@ class App extends Component {
     return (
       <div className={this.state.navtoggled ? "is-nav-toggled-yes" : ""}>
         
-        <Header actionToggleNav={this.toggleNav} actionUpdateApiUrl={this.updateApiUrl} countryCode={this.state.countryCode} countryName={this.state.countryName} />
+        <Header actionToggleNav={this.toggleNav} actionUpdateApiUrl={this.updateApiUrl} actionUpdateHeaderTitle={this.updateHeaderTitle} countryCode={this.state.countryCode} countryName={this.state.countryName} headerTitle={this.state.headerTitle} />
         
         <main id="main" className="main" tabIndex="0">
           
