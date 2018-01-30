@@ -124,6 +124,7 @@ ul {
   .newslist__image {
     width: 90px;
     height: 90px;
+    object-fit: cover;
     margin-top: 22px;
     background-size: cover;
     background-repeat: no-repeat;
@@ -235,9 +236,9 @@ ul {
         display: block;
         border-radius: 50%;
         position: absolute;
-        left: 0px;
-        top: 9px;
-        border: 1px solid rgba(255, 255, 255, 0.95); }
+        left: 1px;
+        top: 8px;
+        border: 2px solid rgba(255, 255, 255, 0.95); }
       .offscreen-nav__item a:checked,
       .offscreen-nav__item button:checked {
         background: blue; }

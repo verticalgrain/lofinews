@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import moment from 'moment';
+import LazyLoad from 'react-lazyload';
 
 class App extends Component {
 
@@ -79,8 +80,10 @@ class App extends Component {
                     {moment(story.publishedAt).fromNow()}
                   </div>
                 </div>
-                <div className="newslist__image" style={{backgroundImage: "url(" + story.urlToImage + ")"}}>
-                </div>
+                <LazyLoad throttle={200} width={90} offset={700}>
+                  {/*<div className="newslist__image" style={{backgroundImage: "url(" + story.urlToImage + ")"}}></div>*/}
+                  <img className="newslist__image" src={story.urlToImage} />
+                </LazyLoad>
               </a>
             </article>
 
