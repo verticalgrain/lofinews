@@ -19,7 +19,9 @@
   width: calc(100vw - #{$offscreen-nav-offset});
   top: 0;
   transform: translate3d( calc(-100vw + #{$offscreen-nav-offset}), 0, 0 );
-  background: #5b7553;
+  background: #134e5e; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #134e5e, #71b280); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #134e5e, #71b280);
   padding: 10px 0 0 20px;
   transition-duration: 0.1s;
   transition-timing-function: ease-in-out;
@@ -27,6 +29,11 @@
   @media (max-width: 600px) {
     width: calc(100vw - #{$offscreen-nav-offset-mobile});
     transform: translate3d( calc(-100vw + #{$offscreen-nav-offset-mobile}), 0, 0 );
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
   }
 
   &__list {
@@ -41,24 +48,22 @@
     padding-right: 40px;
     a,
     button {
-      padding: 0 2px 0 20px;
+      padding: 0 2px 10px 16px;
       width: 100%;
       display: block;
       position: relative;
       background: transparent;
       border: 0;
-      @include nav-text;
-
       &:before {
         content: "";
-        width: 7px;
-        height: 7px;
+        width: 5px;
+        height: 5px;
         display: block;
         border-radius: 50%;
         position: absolute;
         left: 0px;
-        top: 16px;
-        background: rgba(0,0,0,0.5);
+        top: 9px;
+        border: 1px solid rgba(255,255,255,0.95);
       }
       &:checked {
         background: blue;
@@ -73,9 +78,10 @@
       height: 70px;
       margin-top: 20px;
     }
-    &--small {
+    &--credits {
       display: inline;
       font-size: 11px;
+      margin-top: 20px;
       a, div {
         display: inline;
         font-size: 12px;
@@ -88,6 +94,18 @@
         }
       }
     }
+    &--search {
+      padding-right: 20px;
+    }
+  }
+  &__item-name {
+    @include nav-text;
+    line-height: 22px;
+  }
+  &__item-sources {
+    @include nav-text;
+    font-size: 9px;
+    line-height: 140%;
   }
   &__title {
     @include nav-text;
@@ -101,7 +119,7 @@
     height: 38px;
     right: 0px;
     top: 0px;
-    background-position: center;
+    background-position: 6px 2px;
     background-size: 16px;
     background-repeat: no-repeat;
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEyOCAxMjgiIGhlaWdodD0iMTI4cHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB3aWR0aD0iMTI4cHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnPjxnPjxwYXRoIGQ9Ik03Mi41MTEsOTAuNTM2Yy0wLjM4NiwxLjAzNSwwLjE0LDIuMTg3LDEuMTc1LDIuNTczbDE2Ljc0NSw2LjI0OGMtNy44NTQsNS42Mi0xNy4xLDguNTk0LTI2LjgwNCw4LjU5NCAgICBjLTI1LjQzNSwwLTQ2LjEyNy0yMC42OTMtNDYuMTI3LTQ2LjEyOGMwLTEuMTA0LTAuODk2LTItMi0ycy0yLDAuODk2LTIsMmMwLDI3LjY0LDIyLjQ4Nyw1MC4xMjgsNTAuMTI3LDUwLjEyOCAgICBjOS43MjUsMCwxOS4wMjYtMi43NSwyNy4xMTEtNy45NjZsLTMuMDg3LDE0LjU1MWMtMC4yMjksMS4wOCwwLjQ2MSwyLjE0MiwxLjU0MSwyLjM3MWMwLjE0LDAuMDMsMC4yNzksMC4wNDQsMC40MTcsMC4wNDQgICAgYzAuOTI1LDAsMS43NTUtMC42NDUsMS45NTQtMS41ODZsNC42OS0yMi4xMDVsLTIxLjE3LTcuODk4Qzc0LjA1MSw4OC45NzcsNzIuODk4LDg5LjUwMSw3Mi41MTEsOTAuNTM2eiBNNjQuMzc1LDE2LjMyMiAgICBjLTkuNzI4LDAtMTkuMDMsMi43NDktMjcuMTEsNy45NjNsMy4wODYtMTQuNTQ4YzAuMjI5LTEuMDgxLTAuNDYtMi4xNDItMS41NDEtMi4zNzFjLTEuMDc3LTAuMjI5LTIuMTQzLDAuNDYxLTIuMzcxLDEuNTQyICAgIGwtNC42OSwyMi4xMDRsMjEuMTcsNy44OThjMC4yMywwLjA4NiwwLjQ2NywwLjEyNywwLjY5OSwwLjEyN2MwLjgxMSwwLDEuNTczLTAuNDk4LDEuODc0LTEuMzAyICAgIGMwLjM4Ni0xLjAzNC0wLjE0LTIuMTg3LTEuMTc1LTIuNTczbC0xNi43NDctNi4yNWM3Ljg1LTUuNjE4LDE3LjA5Ny04LjU5MSwyNi44MDYtOC41OTFjMjUuNDM0LDAsNDYuMTI1LDIwLjY5MSw0Ni4xMjUsNDYuMTI1ICAgIGMwLDEuMTA0LDAuODk2LDIsMiwyczItMC44OTYsMi0yQzExNC41LDM4LjgwOCw5Mi4wMTQsMTYuMzIyLDY0LjM3NSwxNi4zMjJ6Ii8+PC9nPjwvZz48L3N2Zz4=);
@@ -114,7 +132,7 @@
     border: 0;
     background: transparent;
     padding: 0 10px 0 0;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
     @include nav-text;
     &:focus {
       outline: none;
@@ -122,5 +140,8 @@
     &::placeholder {
       color: white;
     }
+  }
+  &__submit {
+    display: none;
   }
 }
