@@ -64,7 +64,7 @@
         border-radius: 50%;
         position: absolute;
         left: 1px;
-        top: 8px;
+        top: 7px;
         border: 2px solid rgba(255,255,255,0.95);
       }
       &:checked {
@@ -102,6 +102,7 @@
   }
   &__item-name {
     @include nav-text;
+    font-weight: 300;
     line-height: 22px;
   }
   &__item-sources {
