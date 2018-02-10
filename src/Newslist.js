@@ -39,12 +39,6 @@ class App extends Component {
     return colour;
   }
 
-  // componentWillUpdate = () => {
-  //   this.fetchStories(this.props.newsApiCallUrl);
-  // }
-
-  componentDidMount() {
-  }
 
   render() {
     const that = this;
@@ -52,8 +46,9 @@ class App extends Component {
     return (
 
       <div className="newslist__list">
+
         {this.props.stories.map(function(story,i){
-          // console.log(story);
+
           const barColor = that.stringToColor( story.source.name );
           // console.log(barColor);
           const barStyles = {
@@ -66,7 +61,7 @@ class App extends Component {
               <a href={story.url} className="newslist__item"  target="_blank">
                 <div className="newslist__colorbar" style={barStyles}></div>
                 <div className="newslist__content" itemProp="articleBody">
-                  <div className="newslist__source" style={{display: "block",fontSize: "11px"}}>
+                  <div className="newslist__source">
                     {story.source.name}
                   </div>
                   <div className="newslist__title" itemProp="headline">

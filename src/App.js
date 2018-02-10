@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Newslist from './Newslist';
 import Header from './Header';
+import SourcesList from './SourcesList';
 
 class App extends Component {
 
@@ -30,15 +31,12 @@ class App extends Component {
   fetchStories = ( newsApiCallUrl ) => {
     const that = this;
 
-    if ( newsApiCallUrl === that.state.newsApiUrl) {
-      console.log(newsApiCallUrl);
-      console.log( 'same api url so not updating' );
+    if ( newsApiCallUrl === that.state.newsApiUrl ) {
 
       return false;
 
     } else {
       
-      console.log('fetching stories');
       that.getStoriesFromApi( newsApiCallUrl );
 
     }
@@ -49,7 +47,6 @@ class App extends Component {
   getStoriesFromApi = ( newsApiCallUrl ) => {
     const that = this;
 
-    console.log('calling the api to fetch stories...');
     fetch( newsApiCallUrl )
     .then(function(response) {
       if (response.status >= 400) {
@@ -60,7 +57,6 @@ class App extends Component {
       return response.json();
     })
     .then(function(data) {
-      console.log(data);
 
       localStorage.setItem( 'newsStoreLocal', JSON.stringify( data.articles ) );
 
@@ -72,13 +68,11 @@ class App extends Component {
 
 
   getStoriesLocalStore = () => {
-    console.log('loading up stories from localstorage');
 
     if (localStorage.getItem("newsStoreLocal") !== null) {
-      console.log('stories exist in localstorage')
+
       const newsStoreLocal = JSON.parse(localStorage.getItem( 'newsStoreLocal' ));
-    
-      console.log('setting stories in state')
+
       this.setState({
         stories: newsStoreLocal,
         lastUpdated: new Date()
@@ -86,7 +80,7 @@ class App extends Component {
 
       window.scrollTo(0, 0);
     } else {
-      console.log('stories do not exist in localstorage')
+      console.log('d oing this thing that you dont want me to do');
       this.getStoriesFromApi( this.state.newsApiCallUrl );
     }
 
@@ -95,7 +89,6 @@ class App extends Component {
 
   updateApiUrl = ( newsApiUrlNew ) => {
     const that = this;
-    console.log('changing the news api url to check out some new stories');
 
     that.fetchStories( newsApiUrlNew );
 
@@ -124,8 +117,6 @@ class App extends Component {
   updateHeaderTitle = ( headerTitleNew ) => {
     const that = this;
 
-    console.log('updating header title');
-
     this.setState({
       headerTitle: headerTitleNew
     });
@@ -133,6 +124,7 @@ class App extends Component {
 
 
   componentWillMount() {
+    console.log('willmount');
   }
 
 
@@ -146,9 +138,12 @@ class App extends Component {
           
           <div className="newslist newslist--main">
             
+            <SourcesList stories={this.state.stories} />
+
             <Newslist stories={this.state.stories} />
           
           </div>
+
         </main>
 
       </div>

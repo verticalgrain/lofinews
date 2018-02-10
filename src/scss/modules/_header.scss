@@ -1,16 +1,21 @@
 .header {
     text-align: center;
-    padding: 7px 0 5px 0;
+    padding: 10px 0 7px 0;
     border-bottom: 1px solid #404040;
     position: fixed;
     z-index: 9;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 40px;
+    height: 45px;
     background: #f1f1f1;
     transition-duration: 0.2s;
     transition-timing-function: ease-in-out;
+
+    background: #4e4376; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4e4376, #2b5876); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4e4376, #2b5876);
+
     .is-nav-toggled-yes & {
       transform: translate3d( calc(100vw - #{$offscreen-nav-offset}), 0, 0 );
       @media (max-width: 600px) {
@@ -19,8 +24,9 @@
     }
     &__title {
         font-size: 13px;
-        font-weight: 400;
-        letter-spacing: 0.025em;
+        font-weight: 100;
+        letter-spacing: 0.035em;
         padding-top: 5px;
+        color: white;
     }
 }
