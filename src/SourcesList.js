@@ -7,7 +7,7 @@ class SourcesList extends Component {
     super();
 
     this.state = {
-      sourcesCurrent: 'test'
+      sourcesCurrent: ''
     }
 
   }
@@ -17,11 +17,13 @@ class SourcesList extends Component {
     let sourcesAll = '';
 
     if ( this.props.stories !== nextprops.stories ) {
-
-      nextprops.stories.forEach(function(story) {
+      
+      nextprops.stories.forEach(function(story, i) {
+        
+        const comma = ( i > 0 ? ',' : '' )
 
         if ( ! sourcesAll.includes( story.source.name ) ) {
-          sourcesAll = sourcesAll + ' ' + story.source.name;
+          sourcesAll = sourcesAll + comma + ' ' + story.source.name;
         }
 
       })

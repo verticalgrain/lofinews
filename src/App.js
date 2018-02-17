@@ -10,7 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       navtoggled: false,
-      newsApiUrl: 'https://newsapi.org/v2/top-headlines?sources=bbc-news,cnn,the-economist,time,ars-technica,the-washington-post&apiKey=f2bd828e06724a59821444aaec0469dc',
+      newsApiUrl: 'https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,the-washington-post,the-guardian-uk,wired,reuters,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc',
       stories: [],
       countryCode: '',
       countryName: '',
@@ -28,49 +28,34 @@ class App extends Component {
   }
 
 
-  fetchStories = ( newsApiCallUrl ) => {
-    const that = this;
-
-    if ( newsApiCallUrl === that.state.newsApiUrl ) {
-
-      return false;
-
-    } else {
-      
-      that.getStoriesFromApi( newsApiCallUrl );
-
-    }
-
-  }
-
-
   getStoriesFromApi = ( newsApiCallUrl ) => {
     const that = this;
 
-    fetch( newsApiCallUrl )
-    .then(function(response) {
-      if (response.status >= 400) {
-        // throw new Error("The news api doesnt seem available right now");
-        console.log("The news api doesn't seem available right now");
-        return;
-      }
-      return response.json();
-    })
-    .then(function(data) {
+      fetch( newsApiCallUrl )
+      .then(function(response) {
+        if (response.status >= 400) {
+          console.log("The news api doesn't seem available right now");
+          return;
+        }
+        return response.json();
+      })
+      .then(function(data) {
 
-      localStorage.setItem( 'newsStoreLocal', JSON.stringify( data.articles ) );
+        localStorage.setItem( 'newsStoreLocal', JSON.stringify( data.articles ) );
+        // dev todo: store the id of the news feed call also, and the apiurl
+        that.getStories();
 
-      that.getStoriesLocalStore();
-
-    })
+      })
 
   }
 
 
-  getStoriesLocalStore = () => {
+  getStories = ( newsApiCallUrl ) => {
+    const that = this;
 
     if (localStorage.getItem("newsStoreLocal") !== null) {
 
+      // dev todo: fix the above conditional to look for id of news feed call so it can work with multiple feeds and be more useful
       const newsStoreLocal = JSON.parse(localStorage.getItem( 'newsStoreLocal' ));
 
       this.setState({
@@ -79,21 +64,16 @@ class App extends Component {
       });
 
       window.scrollTo(0, 0);
+
+      that.toggleNav()
+
     } else {
-      console.log('d oing this thing that you dont want me to do');
-      this.getStoriesFromApi( this.state.newsApiCallUrl );
+
+      console.log('does not have localstorage')
+
+      this.getStoriesFromApi( newsApiCallUrl );
+
     }
-
-  }
-
-
-  updateApiUrl = ( newsApiUrlNew ) => {
-    const that = this;
-
-    that.fetchStories( newsApiUrlNew );
-
-    this.toggleNav();
-    window.scrollTo(0, 0);
 
   }
 
@@ -124,7 +104,6 @@ class App extends Component {
 
 
   componentWillMount() {
-    console.log('willmount');
   }
 
 
@@ -132,7 +111,7 @@ class App extends Component {
     return (
       <div className={this.state.navtoggled ? "is-nav-toggled-yes" : ""}>
         
-        <Header actionToggleNav={this.toggleNav} actionUpdateApiUrl={this.updateApiUrl} actionUpdateHeaderTitle={this.updateHeaderTitle} countryCode={this.state.countryCode} countryName={this.state.countryName} headerTitle={this.state.headerTitle} />
+        <Header actionToggleNav={this.toggleNav} actionUpdateApiUrl={this.getStoriesFromApi} actionUpdateHeaderTitle={this.updateHeaderTitle} countryCode={this.state.countryCode} countryName={this.state.countryName} headerTitle={this.state.headerTitle} />
         
         <main id="main" className="main" tabIndex="0">
           
@@ -152,8 +131,6 @@ class App extends Component {
 
 
   componentWillUpdate(nextProps, nextState) {
-    // var that = this;
-    // console.log(nextState);
   }
 
 

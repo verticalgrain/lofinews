@@ -72,76 +72,67 @@ class Header extends Component {
                 (( this.props.countryCode.trim() !=="" ) || ( this.props.countryCode.trim().length !== 0 ))
                 ? <div><li className="offscreen-nav__item offscreen-nav__title">Local</li>
                   <li className="offscreen-nav__item">
-                    <button onClick={() => { this.updateHeaderTitle('Headlines - ' + this.props.countryName); this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                      <div className="offscreen-nav__item-name">{this.props.countryName}</div>
-                    </button>
-                    <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                    <input type="radio" name="nav" id="country" onClick={() => { this.updateHeaderTitle('Headlines - ' + this.props.countryName); this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                    <label className="offscreen-nav__item-name" htmlFor="country">{this.props.countryName}</label>
                   </li></div>
                 : <div></div>
               }
               <li className="offscreen-nav__item offscreen-nav__title">Headlines</li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'Headlines - Global' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,the-washington-post,the-guardian-uk,wired,reuters,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }>
-                  <div className="offscreen-nav__item-name">Global</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,the-washington-post,the-guardian-uk,wired,reuters,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <input type="radio" name="nav" id="global" onClick={() => { this.updateHeaderTitle( 'Headlines - Global' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,the-washington-post,the-guardian-uk,wired,reuters,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="global">Global</label>
               </li>
-              {/*<li className="offscreen-nav__item"><a onClick={() => { this.toggleItem( true ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?category=technology&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }>Tech</a></li>*/}
+              {/*<li className="offscreen-nav__item"><a onClick={() => { this.toggleItem( true ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?category=technology&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />Tech</a></li>*/}
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'Headlines - Tech & Futurism' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,techradar,the-next-web,wired,next-big-future&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                  <div className="offscreen-nav__item-name">Tech & Futurism</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,techradar,the-next-web,wired,next-big-future&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <input type="radio" name="nav" id="tech" onClick={() => { this.updateHeaderTitle( 'Headlines - Tech & Futurism' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=buzzfeed,hacker-news,crypto-coins-news,engadget,ars-technica,mashable,recode,reddit-r-all,techcrunch,techradar,the-next-web,wired,next-big-future&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="tech">Tech & Futurism</label>
               </li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'Headlines - Science' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=new-scientist,national-geographic&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                  <div className="offscreen-nav__item-name">Science</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=new-scientist,national-geographic&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <input type="radio" name="nav" id="science" onClick={() => { this.updateHeaderTitle( 'Headlines - Science' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=new-scientist,national-geographic&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="science">Science</label>
               </li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'Headlines - New Media' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news,axios&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                  <div className="offscreen-nav__item-name">New Media</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <input type="radio" name="nav" id="newmedia" onClick={() => { this.updateHeaderTitle( 'Headlines - New Media' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-verge,vice-news,axios&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="newmedia">New Media</label>
               </li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'Headlines - Finance' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bloomberg,business-insider,financial-post,financial-times,fortune,the-economist&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                  <div className="offscreen-nav__item-name">Finance</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bloomberg,business-insider,financial-post,financial-times,fortune,the-economist&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <input type="radio" name="nav" id="finance" onClick={() => { this.updateHeaderTitle( 'Headlines - Finance' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bloomberg,business-insider,financial-post,financial-times,fortune,the-economist&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="finance">Finance</label>
               </li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'Headlines - Politics' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=politico,the-hill&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                  <div className="offscreen-nav__item-name">Politics</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=politico,the-hill&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <input type="radio" name="nav" id="politics" onClick={() => { this.updateHeaderTitle( 'Headlines - Politics' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=politico,the-hill&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="politics">Politics</label>
               </li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'Headlines - Sports' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=nfl-news,nhl-news,the-sport-bible,fox-sports,espn,bbc-sport,talksport&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                  <div className="offscreen-nav__item-name">Sports</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=nfl-news,nhl-news,the-sport-bible,fox-sports,espn,bbc-sport,talksport&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <input type="radio" name="nav" id="sports" onClick={() => { this.updateHeaderTitle( 'Headlines - Sports' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=nfl-news,nhl-news,the-sport-bible,fox-sports,espn,bbc-sport,talksport&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="sports">Sports</label>
               </li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'Headlines - Celebrity Gossip' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-huffington-post,entertainment-weekly,buzzfeed,mashable,mirror&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }>
-                  <div className="offscreen-nav__item-name">Celebrity Gossip</div>
-                </button>
-                <span className="offscreen-nav__refresh" onClick={() => { this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-huffington-post,entertainment-weekly,buzzfeed,mashable,mirror&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } }></span>
+                <input type="radio" name="nav" id="celeb" onClick={() => { this.updateHeaderTitle( 'Headlines - Celebrity Gossip' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=the-huffington-post,entertainment-weekly,buzzfeed,mashable,mirror&pageSize=50&language=en&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="celeb">Celebrity Gossip</label>
               </li>
               
               <li className="offscreen-nav__item offscreen-nav__title">Sources</li>
               <li className="offscreen-nav__item">
-                <button onClick={() => { this.updateHeaderTitle( 'BBC News' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bbc-news&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }><div className="offscreen-nav__item-name">BBC</div></button>
-                <button onClick={() => { this.updateHeaderTitle( 'Reuters' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=reuters&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }><div className="offscreen-nav__item-name">Reuters</div></button>
-                <button onClick={() => { this.updateHeaderTitle( 'CNN' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=cnn&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }><div className="offscreen-nav__item-name">CNN</div></button>
-                <button onClick={() => { this.updateHeaderTitle( 'RT' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }><div className="offscreen-nav__item-name">RT English</div></button>
-                <button onClick={() => { this.updateHeaderTitle( 'Reddit /r/all' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=reddit-r-all&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc'); } }><div className="offscreen-nav__item-name">Reddit-r-all</div></button>
+                <input type="radio" name="nav" id="bbc" onClick={() => { this.updateHeaderTitle( 'BBC News' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bbc-news&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="bbc">BBC</label>
               </li>
-{/*              <li className="offscreen-nav__item offscreen-nav__item--photos">
-                <input type="checkbox" id="checkbox-images" className="u-checkbox offscreen-nav__checkbox" defaultChecked />
-                <label className="u-checkbox-label" htmlFor="checkbox-images">Show images on articles</label>
-              </li>*/}
+              <li className="offscreen-nav__item">
+                <input type="radio" name="nav" id="reuters" onClick={() => { this.updateHeaderTitle( 'Reuters' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=reuters&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="reuters">Reuters</label>
+              </li>
+              <li className="offscreen-nav__item">
+                <input type="radio" name="nav" id="cnn" onClick={() => { this.updateHeaderTitle( 'CNN' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=cnn&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="cnn">CNN</label>
+              </li>
+              <li className="offscreen-nav__item">
+                <input type="radio" name="nav" id="rt" onClick={() => { this.updateHeaderTitle( 'RT' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="rt">RT English</label>
+              </li>
+              <li className="offscreen-nav__item">
+                <input type="radio" name="nav" id="reddit" onClick={() => { this.updateHeaderTitle( 'Reddit /r/all' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=reddit-r-all&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <label className="offscreen-nav__item-name" htmlFor="reddit">Reddit-r-all</label>
+              </li>
               <li className="offscreen-nav__item offscreen-nav__item--credits">
                 <div>news feed provided by</div> <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer">newsapi.org</a>
               </li>
