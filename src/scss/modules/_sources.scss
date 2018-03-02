@@ -3,13 +3,14 @@
   left: 50%;
   transform: translate3d(-50%,0,0);
   position: relative;
-  padding: 12px 8px;
+  padding: 14px 8px;
   margin-bottom: 9px;
   font-size: 11px;
   letter-spacing: 0.025em;
   line-height: 145%;
   background-color: #f1f1f1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.15' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23000000' fill-opacity='0.1' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 3px;
   border-bottom: 1px solid rgba(0,0,0,0.15);
   &__title {
     font-weight: 600;

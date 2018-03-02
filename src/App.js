@@ -24,56 +24,104 @@ class App extends Component {
     this.setState({
       navtoggled: !this.state.navtoggled
     });
-
-  }
-
-
-  getStoriesFromApi = ( newsApiCallUrl ) => {
-    const that = this;
-
-      fetch( newsApiCallUrl )
-      .then(function(response) {
-        if (response.status >= 400) {
-          console.log("The news api doesn't seem available right now");
-          return;
-        }
-        return response.json();
-      })
-      .then(function(data) {
-
-        localStorage.setItem( 'newsStoreLocal', JSON.stringify( data.articles ) );
-        // dev todo: store the id of the news feed call also, and the apiurl
-        that.getStories();
-
-      })
-
   }
 
 
   getStories = ( newsApiCallUrl ) => {
     const that = this;
 
-    if (localStorage.getItem("newsStoreLocal") !== null) {
 
-      // dev todo: fix the above conditional to look for id of news feed call so it can work with multiple feeds and be more useful
-      const newsStoreLocal = JSON.parse(localStorage.getItem( 'newsStoreLocal' ));
+    if (localStorage.getItem( newsApiCallUrl ) !== null && localStorage.getItem( newsApiCallUrl ) !== 'undefined' ) {
 
-      this.setState({
-        stories: newsStoreLocal,
-        lastUpdated: new Date()
-      });
+      console.log('does have localstorage');
 
-      window.scrollTo(0, 0);
+      const newsStore = JSON.parse( localStorage.getItem( newsApiCallUrl ) );
 
-      that.toggleNav()
+      var storedDate = new Date( newsStore.lastUpdate );
+
+      var currentDate = new Date();
+
+      console.log( (currentDate - storedDate)/60000 );
+
+      if ( (currentDate - storedDate)/60000 > 5 ) {
+
+        console.log('localstorage is expired - fetching new stories')
+        this.setStoriesLocalStorage( newsApiCallUrl );
+
+      } else {
+      
+        console.log('loading cached stories from localstorage')  
+        this.updateNewsList( newsApiCallUrl );
+      
+      }      
 
     } else {
 
+      // Dev todo: break this out into a function that fetches stories and saves to local storage?
       console.log('does not have localstorage')
 
-      this.getStoriesFromApi( newsApiCallUrl );
+      this.setStoriesLocalStorage( newsApiCallUrl );
 
     }
+
+  }
+
+
+  updateNewsList = ( newsApiCallUrl ) => {
+    const that = this;
+
+    const newsStoreLocal = JSON.parse(localStorage.getItem( newsApiCallUrl ));
+
+    this.setState({
+      stories: newsStoreLocal.articles,
+    });
+
+    window.scrollTo(0, 0);
+
+    that.toggleNav();
+
+  }
+
+
+  setStoriesLocalStorage = ( newsApiCallUrl ) => {
+    const that = this;
+
+    this.fetchStoriesFromApi( newsApiCallUrl ).then( storiesData => {
+
+      var storiesObject = {
+        lastUpdate: new Date(),
+        articles: storiesData.articles
+      }
+
+      localStorage.setItem( newsApiCallUrl, JSON.stringify( storiesObject ) );
+
+      this.updateNewsList( newsApiCallUrl );
+    
+    }, status => {
+
+      // If fetch fails (network offline)
+      console.log( status );
+      // Dev todo: install notification package and add notification here if network is offline
+
+    });
+
+  }
+
+
+  fetchStoriesFromApi = ( newsApiCallUrl ) => {
+    const that = this;
+
+    return fetch( newsApiCallUrl )
+    .then(function(response) {
+      if (response.status >= 400) {
+        console.log("The news api doesn't seem available right now");
+        return;
+      }
+      return response.json();
+    })
+    .then(function(json) {
+      return json;
+    })
 
   }
 
@@ -111,7 +159,7 @@ class App extends Component {
     return (
       <div className={this.state.navtoggled ? "is-nav-toggled-yes" : ""}>
         
-        <Header actionToggleNav={this.toggleNav} actionUpdateApiUrl={this.getStoriesFromApi} actionUpdateHeaderTitle={this.updateHeaderTitle} countryCode={this.state.countryCode} countryName={this.state.countryName} headerTitle={this.state.headerTitle} />
+        <Header actionToggleNav={this.toggleNav} actionUpdateApiUrl={this.getStories} actionUpdateHeaderTitle={this.updateHeaderTitle} countryCode={this.state.countryCode} countryName={this.state.countryName} headerTitle={this.state.headerTitle} />
         
         <main id="main" className="main" tabIndex="0">
           
@@ -135,7 +183,7 @@ class App extends Component {
 
 
   componentDidMount() {
-    this.getStoriesFromApi( this.state.newsApiUrl );
+    this.getStories( this.state.newsApiUrl );
     this.getCountryCode();
   }
 
