@@ -1,3 +1,4 @@
+import initReactFastclick from 'react-fastclick';
 import React, { Component } from 'react';
 import './App.css';
 import Newslist from './Newslist';
@@ -17,8 +18,9 @@ class App extends Component {
       headerTitle: 'Headlines - Global'
     };
     this.toggleNav = this.toggleNav.bind(this);
-  }
 
+    initReactFastclick();
+  }
 
   toggleNav() {
     this.setState({
