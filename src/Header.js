@@ -60,24 +60,27 @@ class Header extends Component {
           <div className="nav-toggle" onClick={() => this.toggleNav()}>
           </div>
           <div className="offscreen-nav">
+            <div className="offscreen-nav__header">
+              <h1 className="offscreen-nav__header-title">Lofi News</h1>
+              <h2 className="offscreen-nav__header-subtitle">Beat fake news by reading all the sources</h2>
+            </div>
+            <div className="offscreen-nav__search">
+              <form onSubmit={this.handleSubmit}>
+                <label><input type="text" name="search" className="offscreen-nav__searchinput" placeholder="Search top 134 sources..." /></label>
+                {/* //dev todo: add sort options, add sources include / exclude options, checkbox for major sources only (checked by default), date range, language */}
+                <input type="submit" className="offscreen-nav__submit" />
+              </form>
+            </div>
             <ul className="offscreen-nav__list">
-              <li className="offscreen-nav__item offscreen-nav__item--search">
-                <form onSubmit={this.handleSubmit}>
-                  <label><input type="text" name="search" className="offscreen-nav__search" placeholder="Search top 134 sources..." /></label>
-                  {/* //dev todo: add sort options, add sources include / exclude options, checkbox for major sources only (checked by default), date range, language */}
-                  <input type="submit" className="offscreen-nav__submit" />
-                </form>
-              </li>
+              <li className="offscreen-nav__title">Headlines</li>
               {
                 (( this.props.countryCode.trim() !=="" ) || ( this.props.countryCode.trim().length !== 0 ))
-                ? <div><li className="offscreen-nav__item offscreen-nav__title">Local</li>
-                  <li className="offscreen-nav__item">
+                ? <div><li className="offscreen-nav__item">
                     <input type="radio" name="nav" id="country" onClick={() => { this.updateHeaderTitle('Headlines - ' + this.props.countryName); this.updateApiUrl('https://newsapi.org/v2/top-headlines?country=' + this.props.countryCode + '&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
                     <label className="offscreen-nav__item-name" htmlFor="country">{this.props.countryName}</label>
                   </li></div>
                 : <div></div>
               }
-              <li className="offscreen-nav__item offscreen-nav__title">Headlines</li>
               <li className="offscreen-nav__item">
                 <input type="radio" name="nav" id="global" onClick={() => { this.updateHeaderTitle( 'Headlines - Global' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,the-washington-post,the-guardian-uk,wired,reuters,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
                 <label className="offscreen-nav__item-name" htmlFor="global">Global</label>
@@ -112,7 +115,7 @@ class Header extends Component {
                 <label className="offscreen-nav__item-name" htmlFor="celeb">Celebrity Gossip</label>
               </li>
               
-              <li className="offscreen-nav__item offscreen-nav__title">Sources</li>
+              <li className="offscreen-nav__title">Sources</li>
               <li className="offscreen-nav__item">
                 <input type="radio" name="nav" id="bbc" onClick={() => { this.updateHeaderTitle( 'BBC News' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bbc-news&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
                 <label className="offscreen-nav__item-name" htmlFor="bbc">BBC</label>
@@ -133,11 +136,10 @@ class Header extends Component {
                 <input type="radio" name="nav" id="reddit" onClick={() => { this.updateHeaderTitle( 'Reddit /r/all' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=reddit-r-all&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
                 <label className="offscreen-nav__item-name" htmlFor="reddit">Reddit-r-all</label>
               </li>
-              <li className="offscreen-nav__item offscreen-nav__item--credits">
-                <div>news feed provided by</div> <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer">newsapi.org</a>
-              </li>
-
             </ul>
+            <li className="offscreen-nav__credits">
+              <div>news feed provided by</div> <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer">newsapi.org</a>
+            </li>
           </div>
         </nav>
         <div className="header__title">
