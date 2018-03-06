@@ -1,4 +1,3 @@
-import initReactFastclick from 'react-fastclick';
 import React, { Component } from 'react';
 import './App.css';
 import Newslist from './Newslist';
@@ -19,7 +18,6 @@ class App extends Component {
     };
     this.toggleNav = this.toggleNav.bind(this);
 
-    initReactFastclick();
   }
 
   toggleNav() {
