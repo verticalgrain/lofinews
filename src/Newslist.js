@@ -32,7 +32,7 @@ class App extends Component {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
     var colour = '#';
-    for (var i = 0; i < 3; i++) {
+    for (i = 0; i < 3; i++) {
       var value = (hash >> (i * 8)) & 0xFF;
       colour += ('99' + value.toString(16)).substr(-2);
     }
@@ -77,7 +77,7 @@ class App extends Component {
                 </div>
                 <LazyLoad throttle={200} width={90} offset={700}>
                   {/*<div className="newslist__image" style={{backgroundImage: "url(" + story.urlToImage + ")"}}></div>*/}
-                  <img className="newslist__image" src={story.urlToImage} />
+                  <img className="newslist__image" alt={story.title} src={story.urlToImage} />
                 </LazyLoad>
               </a>
             </article>

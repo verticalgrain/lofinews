@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      navtoggled: false,
+      navtoggled: true,
       newsApiUrl: 'https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,the-washington-post,the-guardian-uk,wired,reuters,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc',
       stories: [],
       countryCode: '',
@@ -17,7 +17,6 @@ class App extends Component {
       headerTitle: 'Headlines - Global'
     };
     this.toggleNav = this.toggleNav.bind(this);
-
   }
 
   toggleNav() {
@@ -28,8 +27,6 @@ class App extends Component {
 
 
   getStories = ( newsApiCallUrl ) => {
-    const that = this;
-
 
     if (localStorage.getItem( newsApiCallUrl ) !== null && localStorage.getItem( newsApiCallUrl ) !== 'undefined' ) {
 
@@ -41,7 +38,7 @@ class App extends Component {
 
       var currentDate = new Date();
 
-      console.log( (currentDate - storedDate)/60000 );
+      // console.log( (currentDate - storedDate)/60000 );
 
       if ( (currentDate - storedDate)/60000 > 5 ) {
 
@@ -84,7 +81,6 @@ class App extends Component {
 
 
   setStoriesLocalStorage = ( newsApiCallUrl ) => {
-    const that = this;
 
     this.fetchStoriesFromApi( newsApiCallUrl ).then( storiesData => {
 
@@ -109,7 +105,6 @@ class App extends Component {
 
 
   fetchStoriesFromApi = ( newsApiCallUrl ) => {
-    const that = this;
 
     return fetch( newsApiCallUrl )
     .then(function(response) {
@@ -143,7 +138,6 @@ class App extends Component {
 
 
   updateHeaderTitle = ( headerTitleNew ) => {
-    const that = this;
 
     this.setState({
       headerTitle: headerTitleNew

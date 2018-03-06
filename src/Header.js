@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 class Header extends Component {
-  
-  constructor(props) {
-    super(props);
-  }
 
   toggleNav() {    
     this.props.actionToggleNav();
@@ -82,7 +78,7 @@ class Header extends Component {
                 : <div></div>
               }
               <li className="offscreen-nav__item">
-                <input type="radio" name="nav" id="global" onClick={() => { this.updateHeaderTitle( 'Headlines - Global' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,the-washington-post,the-guardian-uk,wired,reuters,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
+                <input defaultChecked type="radio" name="nav" id="global" onClick={() => { this.updateHeaderTitle( 'Headlines - Global' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=associated-press,bbc-news,cnn,the-economist,time,the-washington-post,the-guardian-uk,wired,reuters,rte&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
                 <label className="offscreen-nav__item-name" htmlFor="global">Global</label>
               </li>
               {/*<li className="offscreen-nav__item"><a onClick={() => { this.toggleItem( true ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?category=technology&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />Tech</a></li>*/}

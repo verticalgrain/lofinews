@@ -42,8 +42,7 @@ class SourcesList extends Component {
 
 
   render() {
-    const that = this;
-
+    
     return (
 
       <div className="sources">
