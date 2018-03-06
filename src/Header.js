@@ -72,7 +72,7 @@ class Header extends Component {
               </form>
             </div>
             <ul className="offscreen-nav__list">
-              <li className="offscreen-nav__title">Headlines</li>
+              <li className="offscreen-nav__title">Headlines - Collections</li>
               {
                 (( this.props.countryCode.trim() !=="" ) || ( this.props.countryCode.trim().length !== 0 ))
                 ? <div><li className="offscreen-nav__item">
@@ -115,7 +115,7 @@ class Header extends Component {
                 <label className="offscreen-nav__item-name" htmlFor="celeb">Celebrity Gossip</label>
               </li>
               
-              <li className="offscreen-nav__title">Sources</li>
+              <li className="offscreen-nav__title">Headlines - Sources</li>
               <li className="offscreen-nav__item">
                 <input type="radio" name="nav" id="bbc" onClick={() => { this.updateHeaderTitle( 'BBC News' ); this.updateApiUrl('https://newsapi.org/v2/top-headlines?sources=bbc-news&pageSize=50&apiKey=f2bd828e06724a59821444aaec0469dc') } } />
                 <label className="offscreen-nav__item-name" htmlFor="bbc">BBC</label>
